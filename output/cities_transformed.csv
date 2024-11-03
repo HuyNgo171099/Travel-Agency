@@ -1,0 +1,16 @@
+city,country,latitude,longitude,mayor,elevation,municipality_population,density,GDP,icao_code
+Amsterdam,Netherlands,52°22′22″N,04°53′37″E,Femke Halsema,−2 m (−7 ft),933680,"5,277/km2(13,670/sq mi)",€201.100 billion,EHAM
+Berlin,Germany,52°31′12″N,13°24′18″E,Kai Wegner,34 m (112 ft),3878100,"4,213/km2(10,910/sq mi)",€193.219 billion,EDDB
+Prague,Czech Republic,50°5′15″N,14°25′17″E,Bohuslav Svoboda,nan,1384732,"2,800/km2(7,200/sq mi)",€78.414 billion,LKPR
+Madrid,Spain,40°25′01″N,03°42′12″W,José Luis Martínez-Almeida,"650 m (2,130 ft)",3223334,"5,300/km2(14,000/sq mi)",€135.6 billion,LEMD
+Brussels,Belgium,50°50′48″N,04°21′09″E,nan,13 m (43 ft),1249597,"7,700/km2(20,000/sq mi)",€96.513 billion,EBBR
+Stockholm,Sweden,59°19′46″N,18°4′7″E,Karin Wanngård,28 m (92 ft),984748,"5,200/km2(14,000/sq mi)",€171.269 billion,ESSA
+Oslo,Norway,59°54′48″N,10°44′20″E,Anne Lindboe,nan,709037,nan,€70.970 billion,ENGM
+Barcelona,Spain,41°22′58″N,02°10′37″E,Jaume Collboni,12 m (39 ft),1620343,"16,000/km2(41,000/sq mi)",€159.8 billion,LEBL
+Seville,Spain,37°23′24″N,5°59′24″W,José Luis Sanz,7 m (23 ft),684234,"4,900/km2(13,000/sq mi)",€36.785 billion,LEZL
+Valencia,Spain,39°28′12″N,00°22′35″W,María José Catalá,15 m (49 ft),807693,"5,998.5/km2(15,536/sq mi)",€56.413 billion,LEVC
+Edinburgh,Scotland,55°57′12″N,03°11′21″W,nan,154 ft (47 m),506520,"11,000/sq mi (4,300/km2)",£31.802 billion,EGPH
+Glasgow,Scotland,55°51′40″N,04°15′00″W,nan,nan,622820,"9,210/sq mi (3,555/km2)",£28.439 billion,EGPF
+Bologna,Italy,44°29′38″N,11°20′34″E,Matteo Lepore,54 m (177 ft),394843,"2,800/km2(7,300/sq mi)",€39.502 billion,LIPE
+Hamburg,Germany,53°33′N,10°00′E,Peter Tschentscher,nan,1964021,"2,600/km2(6,700/sq mi)",€144.220 billion,EDDH
+Belgrade,Serbia,44°49′04″N,20°27′25″E,Aleksandar Šapić,117 m (384 ft),1197714,"3,078/km2(7,970/sq mi)",$34.141 billion,LYBE
