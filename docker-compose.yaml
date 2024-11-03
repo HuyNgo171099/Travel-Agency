@@ -1,0 +1,85 @@
+x-airflow-common: &airflow-common
+  build:
+    context: ./etl
+  environment:
+    - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+    - AIRFLOW__CORE__DAGS_FOLDER=/usr/local/airflow/dags
+    - AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT=60
+    - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=mysql+pymysql://root:${MYSQL_ROOT_PASSWORD}@db:3306/city_weather_flight
+    - AIRFLOW__CORE__FERNET_KEY=FB0o_zt4e3Ziq3LdUUO7F2Z95cvFFx16hU8jTeR1ASM=
+    - AIRFLOW__CORE__LOAD_EXAMPLES=False
+    - AIRFLOW__LOGGING__LOGGING_LEVEL=INFO
+    - AIRFLOW__WEBSERVER__SECRET_KEY=G1VR-HgHhwDihUsL7i63HdIUnS4rPqJUpkWba8uaLek
+    - OPENWEATHER_API_KEY=${OPENWEATHER_API_KEY}
+    - RAPID_API_KEY=${RAPID_API_KEY}
+    - SQLALCHEMY_WARN_20=1
+  volumes:
+    - ./etl:/usr/local/airflow/dags
+    - ./output:/usr/local/airflow/files
+    - ./etl/requirements.txt:/requirements.txt
+  networks:
+    - app_network
+
+services:
+  db:
+    image: mysql:latest
+    container_name: db
+    environment:
+      - MYSQL_ROOT_PASSWORD=HuyNgo123
+      - MYSQL_DATABASE=city_weather_flight
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 2
+      start_period: 60s
+    networks:
+      - app_network
+
+  airflow-init:
+    <<: *airflow-common
+    container_name: airflow_init
+    entrypoint: /bin/bash
+    command: >
+      -c "airflow db init && airflow users create --username admin --firstname Admin --lastname User --role Admin --email admin@example.com --password admin"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app_network
+
+  airflow-webserver:
+    <<: *airflow-common
+    container_name: airflow_webserver
+    command: ["airflow", "webserver"]
+    ports:
+      - 8080:8080
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+    networks:
+      - app_network
+
+  airflow-scheduler:
+    <<: *airflow-common
+    container_name: airflow_scheduler
+    command: ["airflow", "scheduler"]
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+    networks:
+      - app_network
+
+volumes:
+  mysql_data:
+
+networks:
+  app_network:
+    driver: bridge
+
+
+
