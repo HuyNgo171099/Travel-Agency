@@ -67,13 +67,13 @@ After transformation, data was loaded into a MySQL database called `city_weather
 
 ## Orchestrating the ETL Pipeline with Apache Airflow
 
-After running the ETL pipeline using Airflow, I inspected if all the tasks ran successfully using the Airflow webserver GUI. By mapping Docker’s internal port 8080 to my local port 8080, I accessed the Airflow webserver GUI at `localhost:8080` on my browser.
+After running the ETL pipeline using Airflow, I inspected if all the tasks ran successfully using the Airflow webserver GUI. By mapping Docker’s internal port 8080 to my local port 8080, I accessed the Airflow webserver GUI at `localhost:8080` on my browser (I used Microsoft Edge but any other browsers would also work). 
 
-- **DAG Overview**: Airflow uses Directed Acyclic Graphs (DAGs) to collect tasks, organize them with dependencies and relationships to specify how they should run. The tasks `extract_city`, `extract_weather`, and `extract_flight` were executed first and ran in parallel. The green border line indicates successful execution. The `wait_for_load` task serves as a synchronizing step to ensure that all transformations are complete before loading data.
+- **DAG Overview**: Airflow uses Directed Acyclic Graphs (DAGs) to collect tasks, organize them with dependencies and relationships to specify how they should run. The image below depicts the DAG of this project. The tasks `extract_city`, `extract_weather`, and `extract_flight` were executed first and ran in parallel. The green border line indicates that the tasks were executed successfully. The `wait_for_load` task serves as a synchronizing step to ensure that all transformations are complete before loading data.
 
     ![Figure 1: Airflow Directed Acyclic Graph (DAG)](images/airflow_dag.png)
 
-- **Task Logs**: While green border lines on the Airflow webserver GUI indicate successful task completion, it is important to check task logs to verify success, especially if `try-except` blocks are used in the script. The task log provides precise success or error information, confirming that the entire ETL pipeline executed smoothly.
+- **Task Logs**: While green border lines on the Airflow webserver GUI indicate successful task completion, it is important to check task logs to verify success, especially if `try-except` blocks are used in the script. The task log provides precise success or error information. The image below displays the `load_data` task log, which shows a successful run with no errors, confirming that the entire ETL pipeline executed smoothly.
 
     ![Figure 2: Log of the Task load_data](images/log.png)
 
@@ -87,7 +87,7 @@ After the successful run of the ETL pipeline, I accessed the populated MySQL dat
 
     ![Figure 3: SQL Query - City Data](images/query_city.png)
 
-- **Weather Data**: To retrieve Amsterdam's weather forecast, a query on the `Weather` table displays upcoming temperatures and conditions, indicating cold weather over the next four days.
+- **Weather Data**: To retrieve, for instance, Amsterdam's weather forecast, a query on the `Weather` table displays upcoming temperatures and conditions. Based on the output, it seems that it is going to be quite cold in Amsterdam in the next four days. 
 
     ![Figure 4: SQL Query - Weather Data](images/query_weather.png)
 
@@ -97,8 +97,8 @@ After the successful run of the ETL pipeline, I accessed the populated MySQL dat
 
 ## Future Improvements
 
-To enhance the scalability and functionality of this project, here are some improvements planned for the future:
+To enhance the scalability and functionality of this project, here are some improvements that I will like to try out in the future:
 
-- **Dynamic City Selection**: Allow users to add or remove cities of interest without modifying the code. This could be achieved by designing an input form or configuration files to specify the cities.
-- **Additional Data Sources**: Incorporate more APIs or web sources to enrich city data, such as event information, hotel prices, or tourist site popularity. For example, using TripAdvisor to extract hotel prices and restaurant information through web scraping.
-- **Deployment in Cloud Environment**: For scalability and multi-user access, consider deploying the pipeline in a cloud environment (e.g., AWS, Google Cloud, or Azure). This would enable the travel agency to manage larger datasets and support multiple users simultaneously.
+- **Dynamic City Selection**: It would be better if I could allow users to add or remove cities of interest without modifying the code. I think this could be achieved by designing an input form or configuration files to specify the cities.
+- **Additional Data Sources**: I would like to incorporate more APIs or web sources to enrich city data, such as event information, hotel prices, or tourist site popularity. This would provide a more comprehensive overview of each destination. One particular web source that I have in mind for the time being is TripAdvisor. I plan to extract data such as hotel prices and famous restaurants for specific cities from TripAdvisor using web scraping.
+- **Deployment in Cloud Environment**: If I want to make the project scalable and accessible for multiple users, I need to consider deploying the pipeline in a cloud environment (e.g., AWS, Google Cloud, or Azure). This would enable the travel agency to manage larger datasets and scale up for more users.
