@@ -33,16 +33,20 @@ This project involves creating an ETL pipeline to gather relevant city informati
 
    ```sh
    git clone https://github.com/HuyNgo171099/Travel-Agency-Pipeline
-   cd Travel-Agency-Pipeline 
 
-2. **Docker Setup**
+2. **Navigate to the Project Directory**
 
    ```sh
-   docker compose up --build
+   cd Travel-Agency-Pipeline 
 
-3. **Airflow Webserver GUI (localhost:8080)**
+3. **Start All Services**
 
-4. **Log Into MySQL Workbench**
+   ```sh
+   docker compose up --build -d
+
+4. **Access Airflow GUI**: Navigate to `localhost:8080` in your browser and run the DAG.
+
+5. **Start MySQL Workbench**
 
 ## Project Background
 
